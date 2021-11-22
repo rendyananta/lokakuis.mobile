@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">@color/colorAccentDark</color>
+    <color name="colorPrimaryDark">#65749B</color>
+    <color name="colorAccent">#4B94E0</color>
+    <color name="colorAccentDark">#4197F1</color>
+    <color name="colorAccentLight">#98E3FF</color>
+    <color name="colorLight">#E1E4EB</color>
+    <color name="colorBackground">#F5FAFF</color>
+    <color name="colorWhite">#fff</color>
+    <color name="colorBackgroundDark">#6A6C72</color>
+    <color name="colorInactive">#C0D3E6</color>
+    <color name="colorThin">#D8D8DF</color>
+    <color name="colorBackgroundAccent">#D7E9FC</color>
+    <color name="colorBackgroundLight">#E7F6FE</color>
+
+    <!-- Text Color -->
+    <color name="colorText">#0D1133</color>
+    <color name="colorTextLabel">#3F4A5C</color>
+    <color name="colorTextDark">#121314</color>
+    <color name="colorTextTitle">#131415</color>
+    <color name="colorTextSubtitle">#7892AF</color>
+    <color name="colorTextLight">#A2A2A2</color>
+    <color name="colorTextDisabled">#B1B1B1</color>
+    <color name="colorTextThin">#B7B8C2</color>
+    <color name="colorHyperlink">#32373D</color>
+
+    <!-- Color States -->
+    <color name="colorWarning">#fda831</color>
+    <color name="colorDanger">#d34848</color>
+    <color name="colorInfo">#13abc4</color>
+    <color name="colorSuccess">#49b47e</color>
+    <color name="colorSecondary">#ecf0f1</color>
+
+    <!-- TableView color   -->
+    <color name="cell_background_color">@color/colorWhite</color>
+    <color name="header_line_color">@color/colorThin</color>
+    <color name="table_view_default_text_color">@color/colorTextLabel</color>
+
+</resources>
