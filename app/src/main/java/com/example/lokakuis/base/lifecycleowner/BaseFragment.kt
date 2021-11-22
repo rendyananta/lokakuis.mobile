@@ -14,9 +14,10 @@ import com.example.lokakuis.R
 import com.example.lokakuis.base.architecture.BaseViewModel
 import com.example.lokakuis.base.architecture.HasObservableViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.core.component.KoinComponent
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment(),
-    HasObservableViewModel, LifecycleOwner {
+    HasObservableViewModel, LifecycleOwner, KoinComponent {
 
     lateinit var binding: T
     abstract val layoutId: Int

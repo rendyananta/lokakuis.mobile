@@ -16,6 +16,7 @@ object Errors {
                     422 -> errorHandler.handle422()
                     500 -> errorHandler.handle500()
                     502 -> errorHandler.handle502()
+                    503 -> errorHandler.handle503()
                     else -> errorHandler.default(exception)
                 }
             }
@@ -44,28 +45,32 @@ object Errors {
         }
 
         open fun handle401() {
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage(message)
+            vm?.alert(BaseViewModel.Message.ErrorMessage(message))
         }
 
         open fun handle404() {
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage(message)
+            vm?.alert(BaseViewModel.Message.ErrorMessage(message))
         }
 
         open fun handle422() {
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage(message)
+            vm?.alert(BaseViewModel.Message.ErrorMessage(message))
         }
 
         open fun handle500() {
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage("Internal Server Error")
+            vm?.alert(BaseViewModel.Message.ErrorMessage("Internal Server Error"))
         }
 
         open fun handle502() {
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage("Bad Gateway")
+            vm?.alert(BaseViewModel.Message.ErrorMessage("Bad Gateway"))
+        }
+
+        open fun handle503() {
+            vm?.alert(BaseViewModel.Message.ErrorMessage("System On Maintenance"))
         }
 
         open fun default(e: Exception) {
             Log.d("Exception", e.toString())
-            vm?.message?.value = BaseViewModel.Message.ErrorMessage(e.message.toString())
+            vm?.alert(BaseViewModel.Message.ErrorMessage(e.message.toString()))
         }
     }
 }
