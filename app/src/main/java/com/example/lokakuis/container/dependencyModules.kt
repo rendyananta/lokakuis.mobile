@@ -8,6 +8,7 @@ import com.example.lokakuis.base.network.interceptor.AuthInterceptor
 import com.example.lokakuis.base.network.interceptor.CheckInternetInterceptor
 import com.example.lokakuis.base.network.interceptor.HttpErrorInterceptor
 import com.example.lokakuis.base.network.interceptor.XmlHttpRequestInterceptor
+import com.example.lokakuis.http.request.AuthContract
 import com.google.gson.GsonBuilder
 import dev.poteto.formvalidator.Validator
 import dev.poteto.formvalidator.messages.Indonesian
@@ -72,4 +73,6 @@ val dependencyModules = module {
     }
 
     single { Validator(Indonesian) }
+
+    single { get<Retrofit>(named("guest")).create(AuthContract::class.java) as AuthContract }
 }
