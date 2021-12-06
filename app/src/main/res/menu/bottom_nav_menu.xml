@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/nav_home"
-        android:title="Home"
+        android:title="Beranda"
         android:icon="@drawable/ic_home"
         tools:ignore="HardcodedText" />
 
     <item android:id="@+id/nav_feed"
-        android:title="Feed"
+        android:title="Eksplor"
         android:icon="@drawable/ic_feed"
         tools:ignore="HardcodedText" />
 

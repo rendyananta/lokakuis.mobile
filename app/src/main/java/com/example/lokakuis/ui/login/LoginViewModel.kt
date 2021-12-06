@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lokakuis.base.architecture.BaseViewModel
 import com.example.lokakuis.base.extensions.dispatch
+import com.example.lokakuis.base.extensions.dispatchNow
 import com.example.lokakuis.base.extensions.safeCall
+import com.example.lokakuis.service.auth.GetLoginStatus
 import com.example.lokakuis.service.auth.RequestToken
 
 class LoginViewModel : BaseViewModel() {
@@ -16,7 +18,7 @@ class LoginViewModel : BaseViewModel() {
         safeCall {
             val result = dispatch(RequestToken(email, password))
 
-            if (result.meta?.token.isNullOrEmpty()) {
+            if (! result.meta?.token.isNullOrEmpty()) {
                 _loginResult.value = true
             }
         }

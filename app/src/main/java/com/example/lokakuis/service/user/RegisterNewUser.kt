@@ -1,23 +1,27 @@
-package com.example.lokakuis.service.auth
+package com.example.lokakuis.service.user
 
 import android.util.Log
 import com.example.lokakuis.base.extensions.dispatchNow
 import com.example.lokakuis.base.service.AsynchronousService
-import com.example.lokakuis.entity.request.auth.Login
+import com.example.lokakuis.entity.request.auth.Register
 import com.example.lokakuis.entity.response.Response
 import com.example.lokakuis.entity.response.meta.Auth
+import com.example.lokakuis.entity.response.user.User
 import com.example.lokakuis.http.request.AuthRequest
+import com.example.lokakuis.service.auth.SaveToken
 import org.koin.core.component.inject
 
-class RequestToken(
+class RegisterNewUser(
+    private val name: String,
     private val email: String,
     private val password: String,
-) : AsynchronousService<Response<String, Auth>>() {
+    private val passwordConfirmation: String
+) : AsynchronousService<Response<User, Auth>>() {
 
     private val client: AuthRequest by inject()
 
-    override suspend fun runAsync(): Response<String, Auth> {
-        val result = client.login(Login(email, password, android.os.Build.MODEL))
+    override suspend fun runAsync(): Response<User, Auth> {
+        val result = client.register(Register(name, email, password, passwordConfirmation))
 
         result.meta?.let {
             dispatchNow(SaveToken(it.token))

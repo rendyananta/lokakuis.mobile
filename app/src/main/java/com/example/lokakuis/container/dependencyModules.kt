@@ -1,6 +1,5 @@
 package com.example.lokakuis.container
 
-import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.example.lokakuis.BuildConfig
@@ -8,7 +7,7 @@ import com.example.lokakuis.base.network.interceptor.AuthInterceptor
 import com.example.lokakuis.base.network.interceptor.CheckInternetInterceptor
 import com.example.lokakuis.base.network.interceptor.HttpErrorInterceptor
 import com.example.lokakuis.base.network.interceptor.XmlHttpRequestInterceptor
-import com.example.lokakuis.http.request.AuthContract
+import com.example.lokakuis.http.request.AuthRequest
 import com.google.gson.GsonBuilder
 import dev.poteto.formvalidator.Validator
 import dev.poteto.formvalidator.messages.Indonesian
@@ -74,5 +73,5 @@ val dependencyModules = module {
 
     single { Validator(Indonesian) }
 
-    single { get<Retrofit>(named("guest")).create(AuthContract::class.java) as AuthContract }
+    single { get<Retrofit>(named("guest")).create(AuthRequest::class.java) as AuthRequest }
 }

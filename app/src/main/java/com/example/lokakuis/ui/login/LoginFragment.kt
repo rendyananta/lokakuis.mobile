@@ -29,14 +29,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
         this.setupFormValidation()
 
         binding.btnLogin.setOnClickListener {
-            formValidator.reset()
+            this.setupFormValidation()
             if (this.formValidator.check()) {
                 viewModel.fetchAuthorizationToken(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             }
         }
+
+        binding.btnRegister.setOnClickListener {
+            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 
     private fun setupFormValidation() {
+        this.formValidator.reset()
+
         formValidator.buildRulesFor(binding.etEmail)
             .required()
 
@@ -47,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun observeViewModel() {
         viewModel.loginResult.observe(this, {
-            navController.navigate(R.id.nav_account)
+            navController.popBackStack()
         })
     }
 }

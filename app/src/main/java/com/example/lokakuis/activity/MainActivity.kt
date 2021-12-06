@@ -6,6 +6,8 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.lokakuis.R
 import com.example.lokakuis.base.extensions.setVisibleOrGone
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,6 +25,11 @@ class MainActivity : AppCompatActivity() {
         val topLevelDestinationIds = setOf(
             R.id.feedFragment,
         )
+
+        val appBarConfiguration = AppBarConfiguration
+            .Builder(topLevelDestinationIds union setOf(R.id.loginFragment, R.id.registerFragment))
+            .build()
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bnvMain = findViewById(R.id.bnv_main)
 
