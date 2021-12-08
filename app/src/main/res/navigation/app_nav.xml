@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_feedFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_sectionFragment"
+            app:destination="@id/sectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -38,5 +41,30 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.lokakuis.ui.quiz.QuizFragment"
+        android:label="QuizFragment">
+        <argument android:name="topic"
+            app:argType="com.example.lokakuis.entity.response.topic.Topic" />
+        <argument android:name="section"
+            app:argType="com.example.lokakuis.entity.response.section.Section" />
+        <action
+            android:id="@+id/action_quizFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sectionFragment"
+        android:name="com.example.lokakuis.ui.section.SectionFragment"
+        android:label="SectionFragment">
+        <argument android:name="topic"
+            app:argType="com.example.lokakuis.entity.response.topic.Topic" />
+        <action
+            android:id="@+id/action_sectionFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sectionFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
 </navigation>

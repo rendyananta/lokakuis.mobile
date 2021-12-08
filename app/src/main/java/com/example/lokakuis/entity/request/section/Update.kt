@@ -1,4 +1,4 @@
-package com.example.lokakuis.entity.request.subtopic
+package com.example.lokakuis.entity.request.section
 
 data class Update(
     val name: String,

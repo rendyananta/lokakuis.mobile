@@ -7,7 +7,7 @@ import com.example.lokakuis.base.extensions.dispatch
 import com.example.lokakuis.base.extensions.dispatchNow
 import com.example.lokakuis.base.extensions.safeCall
 import com.example.lokakuis.service.auth.GetLoginStatus
-import com.example.lokakuis.service.user.RegisterNewUser
+import com.example.lokakuis.service.auth.RegisterNewUser
 
 class RegisterViewModel : BaseViewModel() {
 
@@ -22,9 +22,5 @@ class RegisterViewModel : BaseViewModel() {
                 _loginResult.value = true
             }
         }
-    }
-
-    fun getAuthorizationStatus(): Boolean {
-        return dispatchNow(GetLoginStatus())
     }
 }

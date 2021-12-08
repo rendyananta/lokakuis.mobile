@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.Navigation
 import com.example.lokakuis.R
 import com.example.lokakuis.base.architecture.BaseViewModel
 import com.example.lokakuis.base.architecture.HasObservableViewModel
@@ -23,13 +24,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     abstract val layoutId: Int
     abstract val viewModel: V
 
+    protected val navController by lazy {
+        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.setupBinding(inflater, container, savedInstanceState)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         this.observeViewModelChanges()
     }
 

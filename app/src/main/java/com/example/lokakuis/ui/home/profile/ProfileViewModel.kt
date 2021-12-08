@@ -1,6 +1,13 @@
 package com.example.lokakuis.ui.home.profile
 
-import com.example.lokakuis.base.architecture.BaseViewModel
+import com.example.lokakuis.base.architecture.AuthenticatedViewModel
+import com.example.lokakuis.base.extensions.dispatchNow
+import com.example.lokakuis.service.auth.RemoveSavedToken
 
-class ProfileViewModel : BaseViewModel() {
+class ProfileViewModel : AuthenticatedViewModel() {
+
+    fun logout() {
+        dispatchNow(RemoveSavedToken())
+        _authenticated.value = false
+    }
 }

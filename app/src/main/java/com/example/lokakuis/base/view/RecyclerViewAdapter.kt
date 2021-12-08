@@ -1,19 +1,13 @@
 package com.example.lokakuis.base.view
 
-import android.annotation.SuppressLint
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 
-abstract class RecyclerViewAdapter<Item, VH : RecyclerViewHolder<Item>> : RecyclerView.Adapter<VH>() {
-    private val items: MutableList<Item> = mutableListOf()
+abstract class RecyclerViewAdapter<Item : Any, VH : RecyclerViewHolder<Item>>(diffCallback: DiffUtil.ItemCallback<Item>)
+    : PagingDataAdapter<Item, VH>(diffCallback) {
+
     private lateinit var itemClickListener: (item: Item) -> Unit
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setItems(newItems: List<Item>) {
-        items.clear()
-        items.addAll(newItems)
-        notifyDataSetChanged()
-    }
 
     fun addOnItemClickListener(listener: (item: Item) -> Unit) {
         itemClickListener = listener
@@ -22,7 +16,7 @@ abstract class RecyclerViewAdapter<Item, VH : RecyclerViewHolder<Item>> : Recycl
     private fun registerClickListener(view: View, position: Int) {
         if (::itemClickListener.isInitialized) {
             view.setOnClickListener {
-                items[position].let {
+                getItem(position)?.let {
                     itemClickListener.invoke(it)
                 }
             }
@@ -30,9 +24,9 @@ abstract class RecyclerViewAdapter<Item, VH : RecyclerViewHolder<Item>> : Recycl
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.bind(items[position])
-        registerClickListener(holder.itemView, position)
+        getItem(position)?.let {
+            holder.bind(it)
+            registerClickListener(holder.itemView, position)
+        }
     }
-
-    override fun getItemCount(): Int = items.size
 }

@@ -1,6 +1,7 @@
 package com.example.lokakuis.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.Navigation
 import com.example.lokakuis.R
@@ -13,10 +14,6 @@ import org.koin.core.component.inject
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     private val formValidator: Validator by inject()
-
-    private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-    }
 
     override val layoutId: Int
         get() = R.layout.fragment_login
@@ -53,6 +50,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun observeViewModel() {
         viewModel.loginResult.observe(this, {
+            Log.wtf("AUTHENTICATED", it.toString())
             navController.popBackStack()
         })
     }

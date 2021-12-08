@@ -13,7 +13,7 @@ class AuthInterceptor : Interceptor, KoinComponent {
         return chain.proceed(
             chain.request()
                 .newBuilder()
-                .addHeader("token", accessToken)
+                .addHeader("Authorization", "Bearer $accessToken")
                 .build()
         )
     }

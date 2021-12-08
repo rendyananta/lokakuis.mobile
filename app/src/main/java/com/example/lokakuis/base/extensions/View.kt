@@ -4,6 +4,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 
@@ -19,6 +20,11 @@ fun ImageView.loadImageUrl(url: String?) {
             .load(url)
             .into(this)
     }
+}
+
+@BindingAdapter("textOrNa")
+fun TextView.textOrNa(content: String?) {
+    text = content ?: "N/A"
 }
 
 @BindingAdapter("loadImageUrlCircled")

@@ -8,10 +8,10 @@ import com.example.lokakuis.entity.response.user.User
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface AuthRequest {
+interface AuthApi {
 
     @POST("/api/auth/login")
-    suspend fun login(@Body loginBody: Login): Response<String, Auth>
+    suspend fun login(@Body loginBody: Login): Response<User, Auth>
 
     @POST("/api/auth/register")
     suspend fun register(@Body registerBody: Register): Response<User, Auth>

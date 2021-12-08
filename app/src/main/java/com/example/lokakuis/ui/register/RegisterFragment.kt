@@ -14,10 +14,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     private val formValidator: Validator by inject()
 
-    private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

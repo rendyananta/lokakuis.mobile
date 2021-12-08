@@ -2,58 +2,72 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.lokakuis.ui.home.profile.ProfileViewModel" />
     </data>
-    <androidx.cardview.widget.CardView
-        android:orientation="vertical"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="12dp"
-        app:contentPadding="16dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
-                android:layout_marginStart="8dp"
-                android:layout_gravity="center_vertical"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content">
+                app:contentPadding="16dp">
 
-<!--                <androidx.appcompat.widget.AppCompatTextView-->
-<!--                    android:id="@+id/txt_name"-->
-<!--                    style="@style/TextSubtitle"-->
-<!--                    android:text="@{profile.name}"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    tools:text="Nama" />-->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <!--                <androidx.appcompat.widget.AppCompatTextView-->
-                <!--                    android:id="@+id/txt_occupation"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="4dp"-->
-                <!--                    android:textColor="@color/colorTextLabel"-->
-                <!--                    tools:text="Jabatan" />-->
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_name"
+                        style="@style/TextSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:textOrNa="@{viewModel.profile.name}"
+                        tools:text="Nama" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorLight" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/colorTextLabel"
+                        app:textOrNa="@{viewModel.profile.email}"
+                        tools:text="Email" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:backgroundTint="@color/colorDanger"
+                android:text="Keluar"
+                tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </layout>

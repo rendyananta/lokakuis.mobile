@@ -1,4 +1,4 @@
-package com.example.lokakuis.service.user
+package com.example.lokakuis.service.auth
 
 import android.util.Log
 import com.example.lokakuis.base.extensions.dispatchNow
@@ -7,8 +7,7 @@ import com.example.lokakuis.entity.request.auth.Register
 import com.example.lokakuis.entity.response.Response
 import com.example.lokakuis.entity.response.meta.Auth
 import com.example.lokakuis.entity.response.user.User
-import com.example.lokakuis.http.request.AuthRequest
-import com.example.lokakuis.service.auth.SaveToken
+import com.example.lokakuis.http.request.AuthApi
 import org.koin.core.component.inject
 
 class RegisterNewUser(
@@ -18,13 +17,15 @@ class RegisterNewUser(
     private val passwordConfirmation: String
 ) : AsynchronousService<Response<User, Auth>>() {
 
-    private val client: AuthRequest by inject()
+    private val client: AuthApi by inject()
 
     override suspend fun runAsync(): Response<User, Auth> {
         val result = client.register(Register(name, email, password, passwordConfirmation))
 
-        result.meta?.let {
-            dispatchNow(SaveToken(it.token))
+        result.meta?.let { auth ->
+            result.data?.let { user ->
+                dispatchNow(SaveToken(auth.token, user))
+            }
         } ?: run {
             Log.w("RequestToken", "meta response is empty")
         }

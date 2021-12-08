@@ -1,42 +1,57 @@
 package com.example.lokakuis.ui.home.feed
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.navigation.Navigation
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lokakuis.R
-import com.example.lokakuis.base.extensions.dispatchNow
-import com.example.lokakuis.base.lifecycleowner.BaseFragment
+import com.example.lokakuis.base.lifecycleowner.AuthenticatedFragment
+import com.example.lokakuis.base.view.GridSpacingItemDecoration
 import com.example.lokakuis.databinding.FragmentFeedBinding
-import com.example.lokakuis.service.auth.GetLoginStatus
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class FeedFragment : BaseFragment<FragmentFeedBinding, FeedViewModel>() {
+class FeedFragment : AuthenticatedFragment<FragmentFeedBinding, FeedViewModel>() {
 
-    private val navController by lazy {
-        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+    private val topicsAdapter by lazy {
+        TopicAdapter()
+    }
+
+    override fun setupBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) {
+        super.setupBinding(inflater, container, savedInstanceState)
+
+        binding.viewModel = viewModel
     }
 
     override fun onResume() {
         super.onResume()
 
-        val loginStatus = dispatchNow(GetLoginStatus())
-
-        if (! loginStatus) {
-            redirectAuth()
+        binding.rvTopics.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            addItemDecoration(GridSpacingItemDecoration(2, 16, false))
+            adapter = topicsAdapter
         }
     }
 
     override fun observeViewModel() {
+        super.observeViewModel()
 
-    }
-
-    private fun redirectAuth() {
-        navController.navigate(R.id.action_feedFragment_to_loginFragment)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.topics.observe(this@FeedFragment, { data ->
+                topicsAdapter.submitData(lifecycle, data)
+            })
+        }
     }
 
     override val layoutId: Int
         get() = R.layout.fragment_feed
     override val viewModel: FeedViewModel
         get() = getViewModel()
+    override val navigateToLoginId: Int
+        get() = R.id.action_feedFragment_to_loginFragment
 }
