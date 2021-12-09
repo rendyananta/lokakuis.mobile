@@ -33,6 +33,4 @@ class ProfileFragment : AuthenticatedFragment<FragmentProfileBinding, ProfileVie
         get() = R.layout.fragment_profile
     override val viewModel: ProfileViewModel
         get() = getViewModel()
-    override val navigateToLoginId: Int
-        get() = R.id.action_profileFragment_to_loginFragment
 }

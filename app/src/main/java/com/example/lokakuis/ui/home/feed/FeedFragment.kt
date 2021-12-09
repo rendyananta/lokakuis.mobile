@@ -2,6 +2,7 @@ package com.example.lokakuis.ui.home.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,13 +29,17 @@ class FeedFragment : AuthenticatedFragment<FragmentFeedBinding, FeedViewModel>()
         binding.viewModel = viewModel
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.rvTopics.apply {
             layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             addItemDecoration(GridSpacingItemDecoration(2, 16, false))
             adapter = topicsAdapter
+        }
+
+        topicsAdapter.addOnItemClickListener {
+            navController.navigate(FeedFragmentDirections.actionFeedFragmentToSectionFragment(it))
         }
     }
 
@@ -52,6 +57,4 @@ class FeedFragment : AuthenticatedFragment<FragmentFeedBinding, FeedViewModel>()
         get() = R.layout.fragment_feed
     override val viewModel: FeedViewModel
         get() = getViewModel()
-    override val navigateToLoginId: Int
-        get() = R.id.action_feedFragment_to_loginFragment
 }

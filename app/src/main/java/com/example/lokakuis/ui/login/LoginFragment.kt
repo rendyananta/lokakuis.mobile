@@ -1,10 +1,15 @@
 package com.example.lokakuis.ui.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.navigation.Navigation
+import androidx.navigation.ui.navigateUp
 import com.example.lokakuis.R
+import com.example.lokakuis.activity.AuthActivity
+import com.example.lokakuis.activity.MainActivity
 import com.example.lokakuis.base.lifecycleowner.BaseFragment
 import com.example.lokakuis.databinding.FragmentLoginBinding
 import dev.poteto.formvalidator.Validator
@@ -50,8 +55,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun observeViewModel() {
         viewModel.loginResult.observe(this, {
-            Log.wtf("AUTHENTICATED", it.toString())
-            navController.popBackStack()
+            if (it) {
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                startActivity(intent)
+            }
         })
     }
 }

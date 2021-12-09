@@ -15,9 +15,9 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -36,12 +36,29 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txt_name"
-                        style="@style/TextSubtitle"
+                        style="@style/TextCaption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Nama"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextSubtitle"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:id="@+id/txt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         app:textOrNa="@{viewModel.profile.name}"
                         tools:text="Nama" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextCaption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Alamat Surel"
+                        tools:ignore="HardcodedText" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txt_email"
@@ -56,14 +73,26 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Ubah Profil"
+                app:icon="@drawable/ic_baseline_edit"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:backgroundTint="@color/colorDanger"
                 android:text="Keluar"
+                app:backgroundTint="@color/colorDanger"
                 tools:ignore="HardcodedText" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         val appBarConfiguration = AppBarConfiguration
-            .Builder(topLevelDestinationIds union setOf(R.id.loginFragment, R.id.registerFragment))
+            .Builder(topLevelDestinationIds)
             .build()
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp() =
-        findNavController(R.id.nav_host_fragment).navigateUp()
+        findNavController(R.id.nav_host_fragment).popBackStack()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

@@ -1,8 +1,11 @@
 package com.example.lokakuis.entity.response.topic
 
+import android.os.Parcelable
 import com.example.lokakuis.entity.response.user.User
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Topic(
     @SerializedName("id")
     val id: Int,
@@ -10,8 +13,8 @@ data class Topic(
     @SerializedName("name")
     val name: String,
 
-    @SerializedName("banner")
-    val banner: String?,
+    @SerializedName("banner_url")
+    val banner: String,
 
     @SerializedName("description")
     val description: String?,
@@ -36,4 +39,4 @@ data class Topic(
 
     @SerializedName("quizzes_count")
     val quizzesCount: Int
-)
+) : Parcelable

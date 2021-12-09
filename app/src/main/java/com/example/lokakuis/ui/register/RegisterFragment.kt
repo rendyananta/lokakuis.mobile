@@ -1,9 +1,11 @@
 package com.example.lokakuis.ui.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
 import com.example.lokakuis.R
+import com.example.lokakuis.activity.MainActivity
 import com.example.lokakuis.base.lifecycleowner.BaseFragment
 import com.example.lokakuis.databinding.FragmentRegisterBinding
 import dev.poteto.formvalidator.Validator
@@ -19,7 +21,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
         this.setupFormValidation()
 
-        binding.btnLogin.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             this.setupFormValidation()
             if (this.formValidator.check()) {
                 viewModel.registerNewUser(
@@ -31,8 +33,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             }
         }
 
-        binding.btnRegister.setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_registerFragment)
+        binding.btnLogin.setOnClickListener {
+            navController.navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 
@@ -49,7 +51,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override fun observeViewModel() {
         viewModel.loginResult.observe(this, {
-            navController.navigate(R.id.action_loginFragment_to_feedFragment)
+            if (it) {
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                startActivity(intent)
+            }
         })
     }
 

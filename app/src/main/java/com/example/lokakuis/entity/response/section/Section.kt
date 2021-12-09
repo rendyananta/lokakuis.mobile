@@ -1,7 +1,10 @@
 package com.example.lokakuis.entity.response.section
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Section (
 
     @SerializedName("id")
@@ -24,4 +27,4 @@ data class Section (
 
     @SerializedName("updated_at")
     val updatedAt: String
-)
+) : Parcelable

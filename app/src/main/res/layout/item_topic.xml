@@ -1,25 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="topic"
             type="com.example.lokakuis.entity.response.topic.Topic" />
     </data>
+
     <com.google.android.material.card.MaterialCardView
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:clickable="true"
-        app:contentPadding="16dp"
-        android:focusable="true">
+        android:focusable="true"
+        android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:text="@{topic.name}"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImageUrl="@{topic.banner}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@{topic.name}"
+                android:textColor="@color/colorTextDark"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/image"
+                tools:text="Topic 1" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:maxLines="2"
+                app:layout_constraintTop_toBottomOf="@+id/txt_name"
+                app:textOrNa="@{topic.description}"
+                tools:text="desc" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_section"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_round_section"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_desc" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/txt_sections_count"
+                style="@style/TextCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:text="@{topic.sectionsCount + ` bagian`}"
+                app:layout_constraintLeft_toRightOf="@id/icon_section"
+                app:layout_constraintTop_toBottomOf="@id/txt_desc"
+                tools:text="12 bagian" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_quiz"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_outline_question_answer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/txt_sections_count"
+                app:layout_constraintTop_toBottomOf="@id/txt_desc" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="6dp"
+                android:text="@{topic.quizzesCount + ` kuis`}"
+                app:layout_constraintLeft_toRightOf="@id/icon_quiz"
+                app:layout_constraintTop_toBottomOf="@id/txt_desc"
+                tools:text="12 kuis" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
