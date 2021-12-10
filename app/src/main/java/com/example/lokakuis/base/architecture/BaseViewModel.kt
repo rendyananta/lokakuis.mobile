@@ -1,9 +1,13 @@
 package com.example.lokakuis.base.architecture
 
+import android.os.Parcelable
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.parcelize.Parcelize
 import org.koin.core.component.KoinComponent
 
 open class BaseViewModel : ViewModel(), KoinComponent {
@@ -21,9 +25,9 @@ open class BaseViewModel : ViewModel(), KoinComponent {
     }
 
     sealed class Message (val body: String) {
-        data class SuccessMessage(val message: String) : Message(message)
-        data class ErrorMessage(val message: String) : Message(message)
-        data class WarningMessage(val message: String) : Message(message)
-        data class InfoMessage(val message: String) : Message(message)
+        @Parcelize data class SuccessMessage(val message: String) : Message(message), Parcelable
+        @Parcelize data class ErrorMessage(val message: String) : Message(message), Parcelable
+        @Parcelize data class WarningMessage(val message: String) : Message(message), Parcelable
+        @Parcelize data class InfoMessage(val message: String) : Message(message), Parcelable
     }
 }

@@ -20,7 +20,7 @@ class RegisterNewUser(
     private val client: AuthApi by inject()
 
     override suspend fun runAsync(): Response<User, Auth> {
-        val result = client.register(Register(name, email, password, passwordConfirmation))
+        val result = client.register(Register(name, email, password, passwordConfirmation, android.os.Build.MODEL))
 
         result.meta?.let { auth ->
             result.data?.let { user ->

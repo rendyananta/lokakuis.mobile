@@ -68,7 +68,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             }
 
             snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).setTextColor(
-                ContextCompat.getColor(requireContext(), R.color.colorTextThin)
+                ContextCompat.getColor(requireContext(), R.color.colorWhite)
             )
 
             snackbar.show()

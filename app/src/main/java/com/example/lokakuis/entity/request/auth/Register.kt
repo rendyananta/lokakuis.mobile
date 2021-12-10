@@ -13,5 +13,8 @@ data class Register(
     val password: String,
 
     @SerializedName("password_confirmation")
-    val passwordConfirmation: String
+    val passwordConfirmation: String,
+
+    @SerializedName("device_name")
+    val deviceName: String
 )

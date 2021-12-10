@@ -10,6 +10,8 @@ import androidx.navigation.ui.navigateUp
 import com.example.lokakuis.R
 import com.example.lokakuis.activity.AuthActivity
 import com.example.lokakuis.activity.MainActivity
+import com.example.lokakuis.base.Constants
+import com.example.lokakuis.base.architecture.BaseViewModel
 import com.example.lokakuis.base.lifecycleowner.BaseFragment
 import com.example.lokakuis.databinding.FragmentLoginBinding
 import dev.poteto.formvalidator.Validator
@@ -56,10 +58,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun observeViewModel() {
         viewModel.loginResult.observe(this, {
             if (it) {
-                val intent = Intent(requireActivity(), MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-                startActivity(intent)
+                startActivity(
+                    Intent(requireActivity(), MainActivity::class.java).apply {
+                        putExtra(Constants.INTENT_NAME_MESSAGE, BaseViewModel.Message.SuccessMessage("Berhasil Masuk"))
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                )
             }
         })
     }

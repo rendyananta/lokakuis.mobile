@@ -19,6 +19,7 @@ class LoginViewModel : BaseViewModel() {
             val result = dispatch(RequestToken(email, password))
 
             if (! result.meta?.token.isNullOrEmpty()) {
+                alert(Message.SuccessMessage("Berhasil Masuk"))
                 _loginResult.value = true
             }
         }

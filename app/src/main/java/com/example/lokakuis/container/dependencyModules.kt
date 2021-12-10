@@ -1,18 +1,12 @@
 package com.example.lokakuis.container
 
-import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
 import com.example.lokakuis.BuildConfig
 import com.example.lokakuis.base.network.interceptor.AuthInterceptor
 import com.example.lokakuis.base.network.interceptor.CheckInternetInterceptor
 import com.example.lokakuis.base.network.interceptor.HttpErrorInterceptor
 import com.example.lokakuis.base.network.interceptor.XmlHttpRequestInterceptor
-import com.example.lokakuis.http.request.AuthApi
-import com.example.lokakuis.http.request.QuizApi
-import com.example.lokakuis.http.request.SectionApi
-import com.example.lokakuis.http.request.TopicApi
+import com.example.lokakuis.http.request.*
 import com.google.gson.GsonBuilder
 import dev.poteto.formvalidator.Validator
 import dev.poteto.formvalidator.messages.Indonesian
@@ -73,6 +67,7 @@ val dependencyModules = module {
     single { Validator(Indonesian) }
 
     single { get<Retrofit>(named("guest")).create(AuthApi::class.java) as AuthApi }
+    single { get<Retrofit>(named("authenticated")).create(ProfileApi::class.java) as ProfileApi }
     single { get<Retrofit>(named("authenticated")).create(TopicApi::class.java) as TopicApi }
     single { get<Retrofit>(named("authenticated")).create(SectionApi::class.java) as SectionApi }
     single { get<Retrofit>(named("authenticated")).create(QuizApi::class.java) as QuizApi }

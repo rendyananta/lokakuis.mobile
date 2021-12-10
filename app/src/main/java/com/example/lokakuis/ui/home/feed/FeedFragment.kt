@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lokakuis.R
+import com.example.lokakuis.base.architecture.BaseViewModel
 import com.example.lokakuis.base.lifecycleowner.AuthenticatedFragment
 import com.example.lokakuis.base.view.GridSpacingItemDecoration
 import com.example.lokakuis.databinding.FragmentFeedBinding

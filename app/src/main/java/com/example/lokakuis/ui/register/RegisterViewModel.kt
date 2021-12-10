@@ -19,6 +19,7 @@ class RegisterViewModel : BaseViewModel() {
             val result = dispatch(RegisterNewUser(name, email, password, passwordConfirmation))
 
             if (! result.meta?.token.isNullOrEmpty()) {
+                alert(Message.SuccessMessage("Berhasil Mendaftar"))
                 _loginResult.value = true
             }
         }

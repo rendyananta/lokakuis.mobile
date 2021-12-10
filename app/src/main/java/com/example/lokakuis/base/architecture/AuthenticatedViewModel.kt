@@ -10,7 +10,7 @@ import com.example.lokakuis.service.auth.GetSavedUserProfile
 
 open class AuthenticatedViewModel : BaseViewModel() {
 
-    protected val _authenticated: MutableLiveData<Boolean> = MutableLiveData()
+    private val _authenticated: MutableLiveData<Boolean> = MutableLiveData()
     val authenticated: LiveData<Boolean> = _authenticated
 
     private val _profile: MutableLiveData<User> = MutableLiveData()
@@ -26,7 +26,17 @@ open class AuthenticatedViewModel : BaseViewModel() {
 
     private fun checkLoginStatus(): Boolean = dispatchNow(GetLoginStatus())
 
-    private fun getUserProfile() {
+    fun getUserProfile() {
         this._profile.value = dispatchNow(GetSavedUserProfile())
+    }
+
+    fun setProfile(user: User?) {
+        user?.let {
+            this._profile.value = user
+        }
+    }
+
+    fun setAuthenticated(status: Boolean) {
+        this._authenticated.value = status
     }
 }

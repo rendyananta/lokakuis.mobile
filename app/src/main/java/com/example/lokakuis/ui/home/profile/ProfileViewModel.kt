@@ -7,7 +7,8 @@ import com.example.lokakuis.service.auth.RemoveSavedToken
 class ProfileViewModel : AuthenticatedViewModel() {
 
     fun logout() {
-        dispatchNow(RemoveSavedToken())
-        _authenticated.value = false
+        if (dispatchNow(RemoveSavedToken())) {
+            setAuthenticated(false)
+        }
     }
 }

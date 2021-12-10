@@ -27,6 +27,10 @@ class ProfileFragment : AuthenticatedFragment<FragmentProfileBinding, ProfileVie
         binding.btnLogout.setOnClickListener {
             viewModel.logout()
         }
+
+        binding.btnUpdateProfile.setOnClickListener {
+            this.navController.navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
     }
 
     override val layoutId: Int
