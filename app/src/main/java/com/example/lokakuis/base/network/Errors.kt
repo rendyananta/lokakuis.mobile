@@ -7,24 +7,24 @@ import org.json.JSONObject
 import retrofit2.HttpException
 
 object Errors {
-    fun handle(from: BaseViewModel, exception: Exception, errorHandler: ErrorHandler = ErrorHandler(from, exception)) {
-        when (exception) {
+    fun handle(from: BaseViewModel, throwable: Throwable, errorHandler: ErrorHandler = ErrorHandler(from, throwable)) {
+        when (throwable) {
             is HttpException -> {
-                when (exception.response()?.code()) {
+                when (throwable.response()?.code()) {
                     401 -> errorHandler.handle401()
                     404 -> errorHandler.handle404()
                     422 -> errorHandler.handle422()
                     500 -> errorHandler.handle500()
                     502 -> errorHandler.handle502()
                     503 -> errorHandler.handle503()
-                    else -> errorHandler.default(exception)
+                    else -> errorHandler.default(throwable)
                 }
             }
-            else -> errorHandler.default(exception)
+            else -> errorHandler.default(throwable)
         }
     }
 
-    open class ErrorHandler(private val vm: BaseViewModel?, e: Exception) {
+    open class ErrorHandler(private val vm: BaseViewModel?, e: Throwable) {
 
         private var message: String = ""
 
@@ -68,7 +68,7 @@ object Errors {
             vm?.alert(BaseViewModel.Message.ErrorMessage("System On Maintenance"))
         }
 
-        open fun default(e: Exception) {
+        open fun default(e: Throwable) {
             Log.d("Exception", e.toString())
             vm?.alert(BaseViewModel.Message.ErrorMessage(e.message.toString()))
         }

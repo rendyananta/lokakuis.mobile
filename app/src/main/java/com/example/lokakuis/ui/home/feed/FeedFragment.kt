@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.lokakuis.R
 import com.example.lokakuis.base.architecture.BaseViewModel
+import com.example.lokakuis.base.extensions.setVisibleOrGone
 import com.example.lokakuis.base.lifecycleowner.AuthenticatedFragment
+import com.example.lokakuis.base.network.Errors
 import com.example.lokakuis.base.view.GridSpacingItemDecoration
 import com.example.lokakuis.databinding.FragmentFeedBinding
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -51,6 +55,17 @@ class FeedFragment : AuthenticatedFragment<FragmentFeedBinding, FeedViewModel>()
             viewModel.topics.observe(this@FeedFragment, { data ->
                 topicsAdapter.submitData(lifecycle, data)
             })
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            topicsAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.rvTopics.setVisibleOrGone(loadStates.refresh !is LoadState.Loading)
+                binding.progressLoading.setVisibleOrGone(loadStates.refresh is LoadState.Loading)
+
+                (loadStates.refresh as? LoadState.Error)?.let {
+                    Errors.handle(this@FeedFragment.viewModel, it.error)
+                }
+            }
         }
     }
 

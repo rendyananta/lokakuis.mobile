@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/nunito_sans_bold"
-                        app:textOrNa="@{viewModel.topic.name + ` ` + viewModel.section.name}"
+                        app:textOrNa="@{viewModel.topic.name + ` / ` + viewModel.section.name}"
                         tools:ignore="HardcodedText"
                         tools:text="Nama Topik / Nama Bagian" />
 
@@ -88,6 +88,13 @@
                 android:layout_marginEnd="16dp"
                 android:text="Daftar Kuis"
                 tools:ignore="HardcodedText" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_loading"
+                android:layout_margin="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_quizzes"

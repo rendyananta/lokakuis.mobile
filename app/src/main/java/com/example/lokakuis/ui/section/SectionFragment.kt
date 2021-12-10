@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lokakuis.R
+import com.example.lokakuis.base.extensions.setVisibleOrGone
 import com.example.lokakuis.base.lifecycleowner.AuthenticatedFragment
+import com.example.lokakuis.base.network.Errors
 import com.example.lokakuis.base.view.GridSpacingItemDecoration
 import com.example.lokakuis.databinding.FragmentSectionBinding
 import com.example.lokakuis.ui.home.feed.FeedFragmentDirections
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -54,6 +58,17 @@ class SectionFragment : AuthenticatedFragment<FragmentSectionBinding, SectionVie
             viewModel.sections.observe(this@SectionFragment, { data ->
                 sectionAdapter.submitData(lifecycle, data)
             })
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            sectionAdapter.loadStateFlow.collectLatest { loadStates ->
+                binding.rvSections.setVisibleOrGone(loadStates.refresh !is LoadState.Loading)
+                binding.progressLoading.setVisibleOrGone(loadStates.refresh is LoadState.Loading)
+
+                (loadStates.refresh as? LoadState.Error)?.let {
+                    Errors.handle(this@SectionFragment.viewModel, it.error)
+                }
+            }
         }
     }
 

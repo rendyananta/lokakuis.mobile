@@ -91,6 +91,13 @@
                 android:text="Daftar Bagian"
                 tools:ignore="HardcodedText" />
 
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_loading"
+                android:layout_margin="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sections"
                 android:layout_width="match_parent"
