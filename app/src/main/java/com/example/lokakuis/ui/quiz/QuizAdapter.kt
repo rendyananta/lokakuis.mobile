@@ -3,6 +3,7 @@ package com.example.lokakuis.ui.quiz
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import com.example.lokakuis.R
 import com.example.lokakuis.base.view.RecyclerViewAdapter
 import com.example.lokakuis.base.view.RecyclerViewHolder
 import com.example.lokakuis.databinding.ItemQuizBinding
@@ -20,6 +21,14 @@ class QuizAdapter : RecyclerViewAdapter<Quiz, QuizAdapter.ViewHolder>(SectionCom
     inner class ViewHolder(private val binding: ItemQuizBinding) : RecyclerViewHolder<Quiz>(binding.root) {
         override fun bind(item: Quiz) {
             binding.quiz = item
+
+            if (item.isMath) {
+                binding.label.setBackgroundResource(R.color.colorAccentLight)
+                binding.label.text = "Matematika"
+            } else {
+                binding.label.setBackgroundResource(R.color.colorBackgroundLight)
+                binding.label.text = "Teori"
+            }
         }
     }
 

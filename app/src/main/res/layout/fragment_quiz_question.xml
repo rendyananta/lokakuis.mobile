@@ -10,14 +10,26 @@
             type="com.example.lokakuis.entity.response.quiz.Quiz" />
     </data>
 
-    <FrameLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -49,6 +61,6 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-    </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </layout>

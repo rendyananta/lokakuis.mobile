@@ -8,23 +8,41 @@
         <variable
             name="quiz"
             type="com.example.lokakuis.entity.response.quiz.Quiz" />
+
+        <variable
+            name="mathAnswer"
+            type="String" />
     </data>
 
-    <FrameLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_desc"
+                    visibleOrGone="@{!quiz.isMath}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -34,10 +52,28 @@
                     android:fontFamily="@font/nunito_sans_bold"
                     app:layout_constraintTop_toBottomOf="@+id/txt_name"
                     app:textOrNa="@{quiz.answer}"
-                    tools:text="question" />
+                    tools:text="answer" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_math_answer"
+                    visibleOrGone="@{quiz.isMath}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="60sp"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_name"
+                    app:textOrNa="@{mathAnswer}"
+                    tools:text="answer" />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.google.android.material.card.MaterialCardView>
-    </FrameLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

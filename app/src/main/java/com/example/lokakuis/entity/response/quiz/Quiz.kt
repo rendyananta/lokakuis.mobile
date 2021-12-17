@@ -18,6 +18,9 @@ data class Quiz(
     @SerializedName("answer")
     val answer: String,
 
+    @SerializedName("is_math")
+    val isMath: Boolean,
+
     @SerializedName("topic_id")
     val topicId: Int,
 
